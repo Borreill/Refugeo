@@ -1,0 +1,72 @@
+<section class="container-fluid pl-md-0">
+    <div class="row">
+        <div class="col-12 col-md-2">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-12 col-md-10 my-4">
+            <h1 class="title mt-3">Fiche détaillée: </h1>
+            <div class="card">
+                <header class="card-header p-3" *ngIf="check">
+                    <h3 class="text-uppercase mb-0 font-weight-bold"> {{ cat.name }}</h3>
+                </header>
+                <h1 class="mb-5 text-center" *ngIf="!check" style="font-weight: 700;">Erreur 404</h1>
+                <main class="card-body row">
+                    <div class="col-12 col-md-3">
+                        <img class="col-sm-4 hidden-xs" style="max-width:400px;" *ngIf="cat.photo" [src]="cat.photo">
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="material-icons mr-2">
+                                    pets
+                                </span>{{ cat.sex}} - {{ cat.color}} - {{ cat.category }}
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="material-icons mr-2">
+                                    cake
+                                </span>Né(e) le: {{ cat.birthDate | date:'dd/MM/yy'}}
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="material-icons mr-2">
+                                    work
+                                </span>Entré(e) le: {{ cat.arrivalDate | date:'dd/MM/yy'}}
+                            </li>
+                            <li class="list-group-item d-flex align-items-center"
+                                *ngIf="cat.deworming && cat.deworming !=='' ">
+                                <span class="material-icons mr-2">
+                                    medical_services
+                                </span>Dernier vermifuge le: {{ cat.deworming  | date:'dd/MM/yy'}}
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="material-icons mr-2">
+                                    healing
+                                </span>Vaccination: {{ cat.vaccination }}
+                            </li>
+                            <li class="list-group-item d-flex align-items-center">
+                                <span class="material-icons mr-2">
+                                    fingerprint
+                                </span>Numéro d'identification: {{ cat.identificationNumber }}
+                            </li>
+                        </ul>
+                        <p class="card-text ml-4" *ngIf="cat.description && cat.description !=='' ">
+                            <strong>Description: </strong>{{ cat.description}}
+                        </p>
+                        <div class="text-left ml-4" *ngIf="isAuth && check">
+                            <button class="btn btn-outline-secondary mt-3 mr-3" (click)="onUpdate()"><span
+                                    class="material-icons">
+                                    create
+                                </span></button>
+                            <button class="btn btn-outline-danger mt-3" (click)="onDeleteCat()"> <span
+                                    class="material-icons">
+                                    delete
+                                </span></button>
+                            <button class="btn btn-primary mt-3 ml-3" (click)="onBack()">Retour</button>
+                        </div>
+                        <app-update-cat *ngIf="isUpdate" [cat]="cat"></app-update-cat>
+
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+</section>

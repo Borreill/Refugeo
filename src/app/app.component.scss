@@ -1,0 +1,30 @@
+
+.body-container{
+  background-color: #fafafa;
+  min-height: 85vh;
+}
+
+html, body {
+  margin: 0; padding: 0;
+  min-height: 100vh;
+}
+
+.navigation-item{
+  color:white !important;
+}
+
+.footer-copyright{
+  background-color: rgba($color: rgb(26, 26, 26), $alpha: 1.0);
+  height: 40px; 
+  background-size: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-title{
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.h3{
+  font-family: 'Open Sans', sans-serif;
+}

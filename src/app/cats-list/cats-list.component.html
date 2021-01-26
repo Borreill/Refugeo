@@ -1,0 +1,108 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-10">
+      <div class="card mt-5">
+        <header class="card-header p-3">
+          <form>
+            <!-- <div class="form-row align-items-center">
+              <div class="col-auto my-1">
+                <input [(ngModel)]="searchString" name="searchString" type="text" class="form-control"
+                  placeholder="Rechercher...">
+              </div>
+              <div class="col-auto my-1">
+                <select name="status" class="form-control" [value]="pipeCatFilter"
+                  (input)="pipeCatFilter = $event.target.value">
+                  <option value="">--- Statut ---</option>
+                  <option value="A l'adoption">A l'adoption</option>
+                  <option value="Réservé(e)">Réservé(e)</option>
+                  <option value="Résident">Résident</option>
+                </select>
+              </div>
+
+              <div class="col-auto my-1">
+                <select name="category" [value]="pipeCatCategoryFilter" (input)="pipeCatCategoryFilter = $event.target.value"
+                  class="form-control">
+                  <option value="">--- Catégorie ---</option>
+                  <option value="chaton">Chaton</option>
+                  <option value="chat adulte">Chat à l'adoption</option>
+                  <option value="chat en parrainage">Chat à parrainer</option>
+                </select>
+              </div>
+
+            </div> -->
+          </form>
+        </header>
+        <main class="card-body">
+          <!-- <div
+            *ngFor="let cat of cats | search:searchString | statusCatFilter: pipeCatFilter | categoryCatFilter: pipeCatCategoryFilter | paginate: { itemsPerPage: 6, currentPage: p }; let index = index"
+            (click)="onViewCat(index)"> -->
+            <div
+            *ngFor="let cat of cats | paginate: { itemsPerPage: 6, currentPage: p }; let index = index"
+            (click)="onViewCat(index)">
+            <div class="card mb-3">
+              <header class="card-header d-flex align-items-center justify-content-between">
+                <h3 class="text-uppercase mb-0 font-weight-bold">{{ cat.name}}</h3>
+                <button class="btn btn-danger m-1 pull-right" (click)="onDeleteCat(cat)" *ngIf="isAuth">
+                  <span class="material-icons">
+                    delete
+                  </span>
+                </button>
+              </header>
+              <main class="card-body row">
+                <div class="col-12 col-md-4">
+                  <img style="max-width: 250px; float:left; margin-right:25px" *ngIf="cat.photo" [src]="cat.photo">
+                </div>
+                <div class="col-12 col-md-8">
+                  <h5 class="card-text p-2 p-md-0">
+                  </h5>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        pets
+                      </span>{{ cat.sex}} - {{ cat.color}} - {{ cat.category }}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        cake
+                      </span>Né(e) le: {{ cat.birthDate | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        work
+                      </span>Entré(e) le: {{ cat.arrivalDate | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center" *ngIf="cat.deworming && cat.deworming !=='' ">
+                      <span class="material-icons mr-2">
+                        medical_services
+                      </span>Dernier vermifuge le: {{ cat.deworming  | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        healing
+                      </span>Vaccination: {{ cat.vaccination }}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        fingerprint
+                      </span>Numéro d'identification: {{ cat.identificationNumber }}
+                    </li>
+                  </ul>
+                  <p class="mt-2 ml-4 font-weight-bold" [style.color]="getColor(cat.status)">
+                    <span> {{ cat.status }}</span>
+                  </p>
+                  <button class="btn btn-outline-dark my-3 ml-4">Voir la fiche détaillée</button>
+                </div>
+              </main>
+            </div>
+          </div>
+        </main>
+        <div class="d-flex justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

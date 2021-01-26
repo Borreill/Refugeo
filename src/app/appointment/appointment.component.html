@@ -1,0 +1,52 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-10">
+      <div class="card mt-5">
+        <main class="card-body">
+          <div *ngFor="let appointment of appointments; let i = index" (click)="onViewAppointment(i)">
+            <div class="card mb-3">
+              <header class="card-header d-flex align-items-center justify-content-between">
+                  <h3 class="text-uppercase mb-0 font-weight-bold">{{ appointment.reason }}</h3>
+                    <button class="btn btn-danger  pull-right" (click)="onDeleteAppointment(appointment)" *ngIf="isAuth">
+                      <span class="material-icons">
+                        delete
+                      </span>
+                    </button>
+              </header>
+              <main class="card-body row">
+                <div class="col-12 col-md-4">
+                  <img style="max-width: 150px; float:left; margin-right:25px" *ngIf="appointment.photo" [src]="appointment.photo">
+                </div>
+                <div class="col-12 col-md-8">
+                  <h5 class="card-text p-2 p-md-0">
+                  </h5>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        calendar_today
+                      </span>{{ appointment.appointmentDate | date:'ds/MM/yy, HH:mm' }}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        person
+                      </span>Bénévole présente: {{ appointment.volunteer}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        article
+                        </span>Description: {{ appointment.description}}
+                    </li>
+                  </ul>
+                  <button class="btn btn-outline-dark my-3 ml-4">Voir le rdv détaillé</button>
+                </div>
+              </main>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </div>
+</section>

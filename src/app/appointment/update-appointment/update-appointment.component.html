@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-12 col-md-9 my-4">
+    <h2 class="title">Modification du RDV:</h2>
+    <form [formGroup]="appointmentFormUpdate" (ngSubmit)="onUpdateAppointmentInfo()">
+      <div class="from-group mt-2">
+        <label for="reason">Motif du rdv*</label>
+        <input type="text" id="reason" class="form-control" formControlName="reason">
+      </div>
+      <div class="from-group mt-2">
+        <label for="appointmentDate">Date et heure*</label>
+        <input type="datetime-local" id="appointmentDate" class="form-control" formControlName="appointmentDate">
+      </div>
+      <div class="from-group mt-2">
+        <label for="volunteer">Bénévole présente*</label>
+        <input type="text" id="volunteer" class="form-control" formControlName="volunteer">
+      </div>
+      <div class="from-group mt-2">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" cols="30" rows="7" class="form-control"
+          formControlName="description" placeholder="Des informations particulières à transmettre lors du rdv?"></textarea>
+      </div>
+      <div class="form-group mt-2">
+        <label for="photo">Photo <em> (max : 100 KB)</em></label>
+        <input type="file" id="photo" class="form-control-file" (change)="detectFile($event)" accept="image/*">
+      </div>
+      <p class="text-success mb-3 mt-3" *ngIf="fileUploaded">Fichier chargé !</p>
+      <p class="text-success mb-3 mt-3" *ngIf="fileTooBig">Image trop lourde !</p>
+      <button class="btn btn-secondary mt-5" type="submit"
+        [disabled]="appointmentFormUpdate.invalid || fileIsUploading">Valider</button>
+    </form>
+  </div>
+</div>

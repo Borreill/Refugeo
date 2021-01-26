@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-sm navigation navbar-light">
+    <div class="container-fluid d-flex justify-content-between">
+        <div class="navbar-brand  d-flex align-items-center">
+            <span class="material-icons icon-paw">
+                pets
+                </span>
+                <a class="brand ml-3">Refugeo</a>
+        </div>
+        <div id="ftco-nav">
+        <ul class="navbar-nav">
+            <li routerLinkActive=" navigation-item">
+                <a class="nav-link" routerLink="/home">Accueil</a>
+            </li>
+            <li class="nav-item  mr-3 ml-3" routerLinkActive="active" *ngIf="isAuth">
+                <a  class="nav-link" routerLink="/cats">Pensionnaires</a>
+            </li>
+            <li class="nav-item  mr-3 ml-3" routerLinkActive="active" *ngIf="!isAuth">
+                <a  class="nav-link" routerLink="auth/signin">Connexion</a>
+            </li>
+            <li class="nav-item  mr-3 ml-3">
+                <a class="nav-link"  (click)="onSignOut()" *ngIf="isAuth" style="cursor:pointer">Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+    </div>
+</nav>
+

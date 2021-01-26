@@ -1,0 +1,28 @@
+<div class="collapse navbar-collapse mt-5" id="menuPets" [ngbCollapse]="isCollapsed">
+  <div class="list-group">
+    <a routerLink="" class="list-group-item list-group-item-action" (click)="onNewCat()">
+      Ajouter nouveau chat
+    </a>
+    <a routerLink="/cats" class="list-group-item list-group-item-action">
+      Voir les chats du refuge
+    </a>
+    <a routerLink="" class="list-group-item list-group-item-action" (click)="onNewDog()">
+      Ajouter nouveau chien
+    </a>
+    <a routerLink="/dogs" class="list-group-item list-group-item-action">
+      Voir les chiens du refuge
+    </a>
+    <a routerLink="/appointments/new" class="list-group-item list-group-item-action">
+      Ajouter un RDV
+    </a>
+    <a routerLink="/appointments" class="list-group-item list-group-item-action">
+      Voir les rdvs
+    </a>
+    <a routerLink="/host-families/new" class="list-group-item list-group-item-action">
+      Ajouter une FA
+    </a>
+    <a routerLink="/host-families" class="list-group-item list-group-item-action">
+      Voir les FA
+    </a>
+  </div>
+</div>

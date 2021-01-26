@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-12 col-md-9 my-4">
+    <h2 class="title">Modification du RDV:</h2>
+    <form [formGroup]="hostFamilyFormUpdate" (ngSubmit)="onUpdateHostFamilyInfo()">
+      <div class="from-group mt-2">
+        <label for="firstName">Prénom*</label>
+        <input type="text" id="firstName" class="form-control" formControlName="firstName">
+      </div>
+      <div class="from-group mt-2">
+        <label for="lastName">Nom*</label>
+        <input type="text" id="lastName" class="form-control" formControlName="lastName">
+      </div>
+      <div class="from-group mt-2">
+        <label for="address">Adresse*</label>
+        <input type="text" id="address" class="form-control" formControlName="address">
+      </div>
+      <div class="from-group mt-2">
+        <label for="phone">Téléphone*</label>
+        <input type="text" id="phone" max="10 "class="form-control" formControlName="phone">
+        <small [style.color]="'red'" class="error" *ngIf="hostFamilyFormUpdate.get('phone').hasError('pattern')">Le formatage du numéro de téléphone est invalide</small>
+      </div>
+      <div class="from-group mt-2">
+        <label for="observation">Observations</label>
+        <textarea name="observation" id="observation" cols="30" rows="7" class="form-control"
+          formControlName="observation" placeholder="Observations concernant la FA"></textarea>
+      </div>
+      <div class="form-group mt-2">
+        <label for="photo">Photo <em> (max : 100 KB)</em></label>
+        <input type="file" id="photo" class="form-control-file" (change)="detectFile($event)" accept="image/*">
+      </div>
+      <p class="text-success mb-3 mt-3" *ngIf="fileUploaded">Fichier chargé !</p>
+      <p class="text-success mb-3 mt-3" *ngIf="fileTooBig">Image trop lourde !</p>
+      <button class="btn btn-secondary mt-5" type="submit"
+        [disabled]="hostFamilyFormUpdate.invalid || fileIsUploading">Valider</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-9 my-4">
+      <h1 class="title">Enregistrer un nouveau RDV</h1>
+      <form [formGroup]="appointmentForm" (ngSubmit)="onSaveAppointment()">
+        <div class="from-group mt-2">
+          <label for="reason">Motif*</label>
+          <input type="text" id="reason" name="reason" class="form-control" formControlName="reason">
+        </div>
+        <div class="from-group mt-2">
+          <label for="appointmentDate">Date et heure*</label>
+          <input type="datetime-local" name="appointmentDate"  id="appointmentDate" class="form-control" formControlName="appointmentDate">
+        </div>
+        <div class="from-group mt-2">
+          <label for="volunteer">Bénévole présente*</label>
+          <input type="text" id="volunteer" name="volunteer" class="form-control" formControlName="volunteer">
+        </div>
+        <div class="from-group mt-2">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" cols="30" rows="7" class="form-control"
+            formControlName="description" placeholder="Des informations particulières à transmettre lors du rdv?"></textarea>
+        </div>
+        <div class="from-group mt-2">
+          <p>Ajouter une photo <em> (max : 100 KB)</em></p>
+          <input type="file" id="photo" (change)="detectFiles($event)" class="form-control-file" accept="image/*">
+          <img style="max-width: 200px" [src]="fileUrl" *ngIf="fileUploaded">
+          <p class="text-success mt-2" *ngIf="fileUploaded">Fichier chargé !</p>
+          <p class="text-success mb-3 mt-3" *ngIf="fileTooBig">Image trop lourde !</p>
+        </div>
+        <button class="btn btn-success mt-5 " [disabled]="appointmentForm.invalid || fileIsUploading" type="submit">
+          Enregistrer
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

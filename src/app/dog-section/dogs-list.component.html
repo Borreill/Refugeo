@@ -1,0 +1,106 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-10">
+      <div class="card mt-5">
+        <header class="card-header p-3">
+          <form>
+            <!-- <div class="form-row align-items-center">
+              <div class="col-auto my-1">
+                <input [(ngModel)]="searchString" name="searchString" type="text" class="form-control"
+                  placeholder="Rechercher...">
+              </div>
+              <div class="col-auto my-1">
+                <select name="status" class="form-control" [value]="pipeDogFilter"
+                  (input)="pipeDogFilter = $event.target.value">
+                  <option value="">--- Statut ---</option>
+                  <option value="A l'adoption">A l'adoption</option>
+                  <option value="Réservé(e)">Réservé(e)</option>
+                  <option value="Résident">Résident</option>
+                </select>
+              </div>
+              <div class="col-auto my-1">
+                <select name="category" [value]="pipeDogCategoryFilter" (input)="pipeDogCategoryFilter = $event.target.value"
+                  class="form-control">
+                  <option value="">--- Catégorie ---</option>
+                  <option value="chiot">Chiot</option>
+                  <option value="chien adulte">Chien à l'adoption</option>
+                  <option value="chien en parrainage">Chien à parrainer</option>
+                </select>
+              </div>
+            </div> -->
+          </form>
+        </header>
+        <main class="card-body">
+          <!-- <div
+            *ngFor="let dog of dogs | search:searchString | statusDogFilter: pipeDogFilter | categoryDogFilter: pipeDogCategoryFilter | paginate: { itemsPerPage: 6, currentPage: p }; let index = index"
+            (click)="onViewDog(index)"> -->
+            <div
+            *ngFor="let dog of dogs | paginate: { itemsPerPage: 6, currentPage: p }; let index = index"
+            (click)="onViewDog(index)">
+            <div class="card mb-3">
+              <header class="card-header d-flex align-items-center justify-content-between">
+                <h3 class="text-uppercase mb-0 font-weight-bold">{{ dog.name}}</h3>
+                <button class="btn btn-danger m-1 pull-right" (click)="onDeleteDog(dog)" *ngIf="isAuth">
+                  <span class="material-icons">
+                    delete
+                  </span>
+                </button>
+              </header>
+              <main class="card-body row">
+                <div class="col-12 col-md-4">
+                  <img style="max-width: 250px; float:left; margin-right:25px" *ngIf="dog.photo" [src]="dog.photo">
+                </div>
+                <div class="col-12 col-md-8">
+                  <h5 class="card-text p-2 p-md-0">
+                  </h5>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        pets
+                      </span>{{ dog.sex}} - {{ dog.color}} - {{ dog.category }}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        cake
+                      </span>Né(e) le: {{ dog.birthDate | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        work
+                      </span>Entré(e) le: {{ dog.arrivalDate | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center" *ngIf="dog.deworming && dog.deworming !=='' ">
+                      <span class="material-icons mr-2">
+                        medical_services
+                      </span>Dernier vermifuge le: {{ dog.deworming  | date:'dd/MM/yy'}}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        healing
+                      </span>Vaccination: {{ dog.vaccination }}
+                    </li>
+                    <li class="list-group-item d-flex align-items-center">
+                      <span class="material-icons mr-2">
+                        fingerprint
+                      </span>Numéro d'identification: {{ dog.identificationNumber }}
+                    </li>
+                  </ul>
+                  <p class="mt-2 ml-4 font-weight-bold" [style.color]="getColor(dog.status)">
+                    <span> {{ dog.status }}</span>
+                  </p>
+                  <button class="btn btn-outline-dark my-3 ml-4">Voir la fiche détaillée</button>
+                </div>
+              </main>
+            </div>
+          </div>
+        </main>
+        <div class="d-flex justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-9 my-4">
+      <h1 class="title">Enregistrer une nouvelle FA</h1>
+      <form [formGroup]="hostFamilyForm" (ngSubmit)="onSaveHostFamily()">
+        <div class="from-group mt-2">
+          <label for="firstName">Prénom*</label>
+          <input type="text" id="firstName" class="form-control" formControlName="firstName">
+        </div>
+        <div class="from-group mt-2">
+          <label for="lastName">Nom*</label>
+          <input type="text" id="lastName" class="form-control" formControlName="lastName">
+        </div>
+        <div class="from-group mt-2">
+          <label for="address">Adresse*</label>
+          <input type="text" id="address" class="form-control" formControlName="address">
+        </div>
+        <div class="from-group mt-2">
+          <label for="phone">Téléphone*</label>
+          <input type="tel" id="phone" class="form-control" formControlName="phone">
+          <small [style.color]="'red'" class="error" *ngIf="hostFamilyForm.get('phone').hasError('pattern')">Le formatage du numéro de téléphone est invalide</small>
+        </div>
+        <div class="from-group mt-2">
+          <label for="observation">Observations</label>
+          <textarea name="observation" id="observation" cols="30" rows="7" class="form-control"
+            formControlName="observation" placeholder="Observations concernant la FA"></textarea>
+        </div>
+        <div class="from-group mt-2">
+          <p>Ajouter une photo <em> (max : 100 KB)</em></p>
+          <input type="file" id="photo" (change)="detectFiles($event)" class="form-control-file" accept="image/*">
+          <img style="max-width: 200px" [src]="fileUrl" *ngIf="fileUploaded">
+          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+          <p class="text-success mb-3 mt-3" *ngIf="fileTooBig">Image trop lourde !</p>
+        </div>
+        <button class="btn btn-success mt-5 " [disabled]="hostFamilyForm.invalid || fileIsUploading" type="submit">
+          Enregistrer
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

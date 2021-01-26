@@ -1,0 +1,95 @@
+<section class="container-fluid pl-md-0">
+  <div class="row">
+    <div class="col-12 col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-12 col-md-9 my-4">
+      <h1 class="title">Enregistrer un nouveau chien</h1>
+      <form [formGroup]="dogForm" (ngSubmit)="onSaveDog()">
+        <div class="from-group mt-2">
+          <label for="name">Nom*</label>
+          <input type="text" id="name" class="form-control" formControlName="name">
+          <small [style.color]="'red'" class="error" *ngIf="dogForm.get('name').hasError('pattern')">Le champ ne doit pas contenir de chiffre</small>
+        </div>
+        <div class="input-group mt-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Catégorie*</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" formControlName="category">
+            <option value="chiot">Chiot</option>
+            <option value="chien adulte">Chien à l'adoption</option>
+            <option value="chien en parrainage">Chien à parrainer</option>
+          </select>
+        </div>
+        <div class="from-group mt-2">
+          <label for="color">Couleur*</label>
+          <input type="text" id="color" class="form-control" formControlName="color" >
+          <small [style.color]="'red'" class="error" *ngIf="dogForm.get('color').hasError('pattern')">Le champ ne doit pas contenir de chiffre</small>
+        </div>
+        <div class="input-group mt-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Sexe*</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" formControlName="sex">
+            <option value="femelle">Femelle</option>
+            <option value="mâle">Mâle</option>
+          </select>
+        </div>
+        <div class="from-group mt-2">
+          <label for="birthDate">Date de naissance*</label>
+          <input type="date" class="form-control" id="birthDate" name="birthDate" formControlName="birthDate">
+        </div>
+        <div class="from-group mt-2">
+          <label for="arrivalDate">Date d'entrée au refuge*</label>
+          <input type="date" class="form-control" id="arrivalDate" name="arrivalDate" formControlName="arrivalDate">
+          <small [style.color]="'red'" *ngIf="dogForm.hasError('notValid')">La date d'entrée et du dernier vermifuge doivent être postérieure à la date de naissance</small>
+        </div>
+        <div class="input-group mt-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Soins vétérinaire</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" formControlName="vaccination">
+            <option value="à faire"></option>
+            <option value="pv1">Primo-vaccination</option>
+            <option value="pv2">Rappel</option>
+            <option value="rappel annuel">Rappel annuel</option>
+          </select>
+        </div>
+        <div class="from-group mt-2">
+          <label for="identificationNumber">Numéro de puce ou tatouage</label>
+          <input type="text" id="identificationNumber" class="form-control" formControlName="identificationNumber">
+        </div>
+        <div class="from-group mt-2">
+          <label for="deworming">Date du dernier vermifuge</label>
+          <input type="date" class="form-control" id="deworming" name="deworming" formControlName="deworming">
+          <small  [style.color]="'red'" *ngIf="dogForm.hasError('notValid')">La date d'entrée et du dernier vermifuge doivent être postérieure à la date de naissance</small>
+        </div>
+        <div class="from-group mt-2">
+          <label for="description">Description</label>
+          <textarea name="description" id="description" cols="30" rows="4" class="form-control"
+            formControlName="description" placeholder="Décrivez le caractère du chat"></textarea>
+        </div>
+        <div class="input-group mt-2">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Statut*</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01" formControlName="status">
+            <option value="A l'adoption">A l'adoption</option>
+            <option value="Réservé(e)">Réservé(e)</option>
+            <option value="Résident">Résident</option>
+          </select>
+        </div>
+        <div class="from-group mt-2">
+          <p>Ajouter une photo <em> (max : 100 KB)</em></p>
+          <input type="file" id="photo" (change)="detectFiles($event)" class="form-control-file" accept="image/*">
+          <img style="max-width: 200px" [src]="fileUrl" *ngIf="fileUploaded">
+          <p class="text-success" *ngIf="fileUploaded">Fichier chargé !</p>
+          <p class="text-success mb-3 mt-3" *ngIf="fileTooBig">Image trop lourde !</p>
+        </div>
+        <button class="btn btn-success mt-5 " [disabled]="dogForm.invalid || fileIsUploading" type="submit">
+          Enregistrer
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
